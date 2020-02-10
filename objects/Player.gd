@@ -7,6 +7,11 @@ func _ready():
 	screen_size = get_viewport_rect().size
 
 func _process(delta):
+	var velocity = _get_velocity()
+	_update_position(velocity, delta)
+	_update_animation(velocity)
+
+func _get_velocity():
 	var velocity = Vector2()  # The player's movement vector.
 	
 	if Input.is_action_pressed("ui_right"):
@@ -17,16 +22,19 @@ func _process(delta):
 		velocity.y += 1
 	if Input.is_action_pressed("ui_up"):
 		velocity.y -= 1
-	
-	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed
-		$AnimatedSprite.play()
-	else:
-		$AnimatedSprite.stop()
-	
+
+	return velocity.normalized() * speed
+
+func _update_position(velocity, delta):
 	position += velocity * delta
 	position.x = clamp(position.x, 0, screen_size.x)
 	position.y = clamp(position.y, 0, screen_size.y)
+
+func _update_animation(velocity):
+	if velocity.length() > 0:
+		$AnimatedSprite.play()
+	else:
+		$AnimatedSprite.stop()
 
 	if velocity.x != 0:
 		$AnimatedSprite.animation = "right"
@@ -35,4 +43,3 @@ func _process(delta):
 	elif velocity.y != 0:
 		$AnimatedSprite.animation = "up"
 		$AnimatedSprite.flip_v = velocity.y > 0
-	
