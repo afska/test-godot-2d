@@ -14,12 +14,17 @@ func new_game():
 	
 	$Player.start($StartPosition.position)
 	$Timers/StartTimer.start()
+	
+	$Audio/Music.play()
 
 func game_over():
 	$HUD.show_game_over()
 	
 	$Timers/ScoreTimer.stop()
 	$Timers/MobTimer.stop()
+	
+	$Audio/Music.stop()
+	$Audio/DeathSound.play()
 
 func _on_StartTimer_timeout():
 	$Timers/MobTimer.start()
