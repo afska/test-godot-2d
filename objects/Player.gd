@@ -11,12 +11,13 @@ func start(new_position):
 	$CollisionShape2D.disabled = false
 
 func _ready():
-	# hide()
+	hide()
 	screen_size = get_viewport_rect().size
 
 func _on_body_entered(body):
-	hide()  # Player disappears after being hit.
 	emit_signal("hit")
+	
+	hide()  # Player disappears after being hit.
 	$CollisionShape2D.set_deferred("disabled", true)
 	# ^ Disabling the area’s collision shape can cause an error if it happens
 	# in the middle of the engine’s collision processing; hence the `deferred`.
