@@ -36,6 +36,7 @@ func _on_MobTimer_timeout():
 	# Create a Mob instance and add it to the scene.
 	var mob = Mob.instance()
 	add_child(mob)
+	$HUD.connect("start_game", mob, "_on_start_game")
 	
 	# Set the mob's direction perpendicular to the path direction.
 	var direction = $MobPath/MobSpawnLocation.rotation + PI / 2
