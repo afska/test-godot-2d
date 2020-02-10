@@ -14,6 +14,14 @@ _data = {
 script = ExtResource( 1 )
 Mob = ExtResource( 3 )
 
+[node name="Background" type="ColorRect" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0.360784, 0.164706, 0.643137, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Player" parent="." instance=ExtResource( 2 )]
 
 [node name="StartPosition" type="Position2D" parent="."]
